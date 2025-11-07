@@ -43,11 +43,14 @@ function createWindow() {
         }
     });
 }
+
+// Bouton open
                 },{label:'open',click:()=>{
     dialog.showOpenDialog(mainWindow, {
         title: 'Ouvrir une note',
         properties: ['openFile'],
-        filters: [{ name: 'Text Files', extensions: ['txt'] }]
+        filters: [  { name: 'Text Files', extensions: ['txt', '*' ] }
+        ],
     }).then(result => {
         if (!result.canceled) {
             const filePath = result.filePaths[0];
