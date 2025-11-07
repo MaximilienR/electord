@@ -87,13 +87,29 @@ function doc() {
   dialog.showMessageBox(mainWindow, {
     type: 'info',
     title: 'Documentation',
-    message: `Documentation de l’application
+    message: `Développeur : Maximilien Freelance 
+Années de création : 2025
 
-Développeur : Maximilien Freelance
-Année : 2025
+Description 
 
-Cette application permet de prendre et sauvegarder des notes rapidement.
-Technos : HTML, CSS, JS, Electron.`,
+Cette application a été conçue pour permettre la création rapide et intuitive de note. elle offre une interface simple et efficace afin de faciliter la prise de notes au quotidient, tout en restant légère et performante. 
+
+technologie utulisés 
+
+L'application a été devellopée avec les technologies suivantes : 
+Html5 : pour la structure et le contenu 
+CSss3 : pour le design et le style viseul 
+Javascript(ES6) : pour les fonctionnalités et interativité 
+
+Objectif 
+
+L'objectif principal de cette application est de fournir aux utilisateurs un outil pratique pour capturer et organiser leurs idées, tâches et informations importantes de manière rapide et efficace.
+
+Fonctionnalités principales :
+- Interface utilisateur simple et intuitive 
+- Sauvegarde et ouverture facile des notes 
+- Léger et performant pour une utilisation fluide et rapide 
+- Possibilité de partager des notes avec d'autres utilisateurs`,
     buttons: ['OK']
   });
 }
