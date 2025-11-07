@@ -43,7 +43,27 @@ function createWindow() {
         }
     });
 }
+                },{label:'open',click:()=>{
+    dialog.showOpenDialog(mainWindow, {
+        title: 'Ouvrir une note',
+        properties: ['openFile'],
+        filters: [{ name: 'Text Files', extensions: ['txt'] }]
+    }).then(result => {
+        if (!result.canceled) {
+            const filePath = result.filePaths[0];
+
+            fs.readFile(filePath, 'utf8', (err, content) => {
+                if (err) {
+                    console.error('Erreur lors de la lecture du fichier :', err);
+                } else {
+                    mainWindow.webContents.executeJavaScript(`document.getElementById("input").value = '${content}'`);
+                }
+            });
+        }
+    });
+}
                 },
+                
                 { role: 'quit' }
             ]
         },
