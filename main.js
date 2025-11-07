@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Menu, dialog } = require('electron');
-
+const fs = require('fs');
 let mainWindow;
 
 function createWindow() {
@@ -15,61 +15,42 @@ function createWindow() {
     mainWindow.loadFile('index.html');
 
     // Créer un menu personnalisé
-    const template = [
-        {
-            label: 'File',
-            submenu: [
-                {
-                    label: 'Save',
-                    accelerator: 'CmdOrCtrl+S',
-                    click: () => {
-                        // Exemple : ouvrir une boîte de dialogue pour enregistrer
-                        dialog.showSaveDialog(mainWindow, {
-                            title: 'Save your file',
-                            defaultPath: 'note.txt',
-                        }).then(result => {
-                            if (!result.canceled) {
-                                console.log('Chemin du fichier :', result.filePath);
-                                // Ici tu peux écrire le contenu dans le fichier
-                            }
-                        });
-                    }
-                },
-                { role: 'quit' } // Option pour quitter l'application
-            ]
-        },
-        {
-            label: 'Edit',
-            submenu: [
-                { role: 'undo' },
-                { role: 'redo' },
-                { type: 'separator' },
-                { role: 'cut' },
-                { role: 'copy' },
-                { role: 'paste' },
-            ]
-        },
-        {
-            label: 'View',
-            submenu: [
-                { role: 'reload' },
-                { role: 'toggledevtools' },
-            ]
-        },
-        {
-            role: 'help',
-            submenu: [
-                {
-                    label: 'About',
-                    click: () => {
-                        dialog.showMessageBox(mainWindow, {
-                            message: 'Bloc-notes de Max v1.0',
-                        });
-                    }
+  const { dialog } = require('electron');
+const fs = require('fs');
+
+// Exemple pour ton menu
+const template = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Save',
+                accelerator: 'CmdOrCtrl+S',
+                click: () => {
+                    dialog.showSaveDialog(mainWindow, {
+                        title: 'Save your file',
+                        defaultPath: 'note.txt',
+                    }).then(result => {
+                        if (!result.canceled) {
+                            const filePath = result.filePath;
+                            const content = 'Contenu à enregistrer'; // Remplace par ton texte réel
+
+                            fs.writeFile(filePath, content, (err) => {
+                                if (err) {
+                                    console.error('Erreur lors de l\'enregistrement :', err);
+                                } else {
+                                    console.log('Fichier enregistré avec succès !');
+                                }
+                            });
+                        }
+                    });
                 }
-            ]
-        }
-    ];
+            },
+            { role: 'quit' }
+        ]
+    },
+];
+
 
     const menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
